@@ -179,7 +179,10 @@ class ScenarioRunner(object):
                 settings.synchronous_mode = False
                 settings.fixed_delta_seconds = None
                 self.world.apply_settings(settings)
-                self.client.get_trafficmanager(int(self._args.trafficManagerPort)).set_synchronous_mode(False)
+                if self._args.noTrafficManager:
+                    pass
+                else:
+                    self.client.get_trafficmanager(int(self._args.trafficManagerPort)).set_synchronous_mode(False)
             except RuntimeError:
                 sys.exit(-1)
 
@@ -366,10 +369,12 @@ class ScenarioRunner(object):
                 print("Could not setup required agent due to {}".format(e))
                 self._cleanup()
                 return False
-
-        CarlaDataProvider.set_traffic_manager_port(int(self._args.trafficManagerPort))
-        tm = self.client.get_trafficmanager(int(self._args.trafficManagerPort))
-        tm.set_random_device_seed(int(self._args.trafficManagerSeed))
+        if self._args.noTrafficManager:
+            pass
+        else:
+            CarlaDataProvider.set_traffic_manager_port(int(self._args.trafficManagerPort))
+            tm = self.client.get_trafficmanager(int(self._args.trafficManagerPort))
+            tm.set_random_device_seed(int(self._args.trafficManagerSeed))
         if self._args.sync:
             tm.set_synchronous_mode(True)
 
@@ -535,6 +540,7 @@ def main():
                         help='Port to use for the TrafficManager (default: 8000)')
     parser.add_argument('--trafficManagerSeed', default='0',
                         help='Seed used by the TrafficManager (default: 0)')
+    parser.add.argument('--noTrafficManager', action="store_true", help='Disable the TrafficManager')
     parser.add_argument('--sync', action='store_true',
                         help='Forces the simulation to run synchronously')
     parser.add_argument('--list', action="store_true", help='List all supported scenarios and exit')
