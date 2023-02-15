@@ -118,6 +118,19 @@ class ActorControl(object):
         if start_time:
             self._last_waypoint_command = start_time
 
+    def update_trajectory(self, vertexes, start_time=None):
+        """
+        Custom code extension
+        Update the actor's trajectory
+
+        Args:
+            vertexes (List of carla.Transform and timestamp): List of new trajectory(vertexes).
+            start_time (float): Start time of the new "maneuver" [s].
+        """
+        self.control_instance.update_trajectory(vertexes, start_time)
+        if start_time:
+            self._last_trajectory_command = start_time
+
     def update_offset(self, offset, start_time=None):
         """
         Update the actor's offset
@@ -139,6 +152,15 @@ class ActorControl(object):
             True if the end was reached, False otherwise.
         """
         return self.control_instance.check_reached_waypoint_goal()
+
+    def check_reached_trajectory_goal(self):
+        """
+        Check if the actor reached the end of the trajectory list
+
+        returns:
+            True if the end was reached, False otherwise.
+        """
+        return self.control_instance.check_reached_trajectory_goal()
 
     def get_last_longitudinal_command(self):
         """
