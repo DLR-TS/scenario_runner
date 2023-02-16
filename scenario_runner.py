@@ -583,9 +583,14 @@ def main():
         return 1
 
     if not arguments.scenario and not arguments.openscenario and not arguments.route:
-        print("Please specify either a scenario or use the route mode\n\n")
-        parser.print_help(sys.stdout)
-        return 1
+        if os.path.exists('setlevel_scenario.xosc') and os.path.exists('setlevel_map.xodr'):
+            arguments.openscenario = 'setlevel_scenario.xosc'
+        else:
+            print("Please specify either a scenario or use the route mode.\nOr make sure you that the default files setlevel_scenario.xosc and setlevel_map.xodr exist.\n\n")
+            return 1
+        #print("Please specify either a scenario or use the route mode\n\n")
+        #parser.print_help(sys.stdout)
+        #return 1
 
     if arguments.route and (arguments.openscenario or arguments.scenario):
         print("The route mode cannot be used together with a scenario (incl. OpenSCENARIO)'\n\n")
