@@ -160,7 +160,7 @@ class OpenScenarioConfiguration(ScenarioConfiguration):
 
 
         # default map if setlevel / ostar scenario is used (over upload server)
-        if self._filename == "setlevel_scenario.xosc" :
+        if self.filename == "setlevel_scenario.xosc" :
             self.town = "setlevel_map.xodr"
         else:
             for logic in self.xml_tree.find("RoadNetwork").findall("LogicFile"):
