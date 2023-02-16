@@ -10,3 +10,8 @@ numpy
 matplotlib
 six
 simple-watchdog-timer
+
+#ostar requirements
+grpcio
+grpcio-tools==1.44.0
+CherryPy
