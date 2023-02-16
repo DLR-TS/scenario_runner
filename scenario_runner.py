@@ -540,7 +540,7 @@ def main():
                         help='Port to use for the TrafficManager (default: 8000)')
     parser.add_argument('--trafficManagerSeed', default='0',
                         help='Seed used by the TrafficManager (default: 0)')
-    parser.add.argument('--noTrafficManager', action="store_true", help='Disable the TrafficManager')
+    parser.add_argument('--noTrafficManager', action="store_true", help='Disable the TrafficManager')
     parser.add_argument('--sync', action='store_true',
                         help='Forces the simulation to run synchronously')
     parser.add_argument('--list', action="store_true", help='List all supported scenarios and exit')
