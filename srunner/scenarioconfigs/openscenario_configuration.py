@@ -157,8 +157,14 @@ class OpenScenarioConfiguration(ScenarioConfiguration):
         Note: The specification allows multiple Logics elements within the RoadNetwork element.
               Hence, there can be multiple towns specified. We just use the _last_ one.
         """
-        for logic in self.xml_tree.find("RoadNetwork").findall("LogicFile"):
-            self.town = logic.attrib.get('filepath', None)
+
+
+        # default map if setlevel / ostar scenario is used (over upload server)
+        if self._filename == "setlevel_scenario.xosc" :
+            self.town = "setlevel_map.xodr"
+        else:
+            for logic in self.xml_tree.find("RoadNetwork").findall("LogicFile"):
+                self.town = logic.attrib.get('filepath', None)
 
         if self.town is not None and ".xodr" in self.town:
             if not os.path.isabs(self.town):

@@ -22,6 +22,7 @@ run pip3 install --user setuptools==46.3.0 wheel==0.34.2 && pip3 install py_tree
 # Install scenario_runner 
 copy . /app/scenario_runner
 
+
 # setup environment :
 # 
 #   CARLA_HOST :    uri for carla package without trailing slash. 
