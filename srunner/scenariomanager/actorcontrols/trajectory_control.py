@@ -27,7 +27,7 @@ class Pose:
         t = 0.0
 
 
-class FollowTrajectoryControl(BasicControl):
+class TrajectoryControl(BasicControl):
 
     """
     Controller class for vehicles derived from BasicControl.
@@ -52,7 +52,7 @@ class FollowTrajectoryControl(BasicControl):
         self.last_elapsed_time = 0.0
         self.start_time = 0.0
 
-        super(FollowTrajectoryControl, self).__init__(actor)
+        super(TrajectoryControl, self).__init__(actor)
 
     def update_trajectory(self, vertexes, start_time=None):
         """
