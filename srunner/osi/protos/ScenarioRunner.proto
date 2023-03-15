@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+import "osi3/osi_trafficcommand.proto";
+
+package srunner.osi.client;
+
+message Float {
+	float value = 1;
+}
+
+service OSIVehicleController {
+    rpc SendCommand(osi3.TrafficCommand) returns (Float) {}
+}
