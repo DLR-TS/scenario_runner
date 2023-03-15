@@ -160,8 +160,8 @@ class OpenScenarioConfiguration(ScenarioConfiguration):
 
 
         # default map if setlevel / ostar scenario is used (over upload server)
-        if self.filename == "setlevel_scenario.xosc" :
-            self.town = "setlevel_map.xodr"
+        if self.filename == "setlevel_scenario.xosc":
+                self.town = "setlevel_map.xodr"
         else:
             for logic in self.xml_tree.find("RoadNetwork").findall("LogicFile"):
                 self.town = logic.attrib.get('filepath', None)
@@ -183,9 +183,8 @@ class OpenScenarioConfiguration(ScenarioConfiguration):
             if ".xodr" in self.town:
                 with open(self.town, 'r', encoding='utf-8') as od_file:
                     data = od_file.read()
-                index = data.find('<OpenDRIVE>')
+                index = data.find('<OpenDRIVE')
                 data = data[index:]
-
                 old_map = ""
                 if wmap is not None:
                     old_map = wmap.to_opendrive()
